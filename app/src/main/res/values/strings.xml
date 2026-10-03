@@ -1,1 +1,5 @@
-<resources><string name="app_name">Remote Input</string></resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remote Input</string>
+    <string name="accessibility_service_description">Receives the configured two-digit remote shortcut and asks before switching the TV input.</string>
+</resources>
