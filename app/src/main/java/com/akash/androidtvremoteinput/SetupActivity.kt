@@ -70,7 +70,7 @@ class SetupActivity : AppCompatActivity() {
                 hint = "2 digits"
                 inputType = InputType.TYPE_CLASS_NUMBER
                 setText(prefs.getString("code_" + (i + 1), ""))
-                selectAllOnFocus = true
+                setSelectAllOnFocus(true)
             }
             codeFields += code
             row.addView(code, LinearLayout.LayoutParams(150, -2))
