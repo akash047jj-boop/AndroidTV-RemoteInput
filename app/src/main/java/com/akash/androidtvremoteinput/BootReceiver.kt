@@ -1,10 +1,19 @@
 package com.akash.androidtvremoteinput
+
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action == Intent.ACTION_BOOT_COMPLETED || intent.action == Intent.ACTION_LOCKED_BOOT_COMPLETED)
-            context.startService(Intent(context, RemoteInputService::class.java))
+        if (intent.action != Intent.ACTION_BOOT_COMPLETED &&
+            intent.action != Intent.ACTION_LOCKED_BOOT_COMPLETED) return
+        val prefs = context.getSharedPreferences("config", Context.MODE_PRIVATE)
+        if (!prefs.getBoolean("configured", false)) return
+        try {
+            context.startForegroundService(Intent(context, RemoteInputService::class.java))
+        } catch (_: Exception) {
+            // AccessibilityService is restored by Android when it has been enabled by the user.
+        }
     }
 }
